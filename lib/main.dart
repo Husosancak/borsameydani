@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/login_screen.dart';
-import 'screens/register_screen.dart'; // ✅ Register ekranı eklendi
+import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/about_screen.dart';
@@ -10,11 +10,23 @@ import 'screens/about_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Oturum kontrolü
   final prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString('token');
+  final token = prefs.getString('token') ?? '';
 
-  runApp(BorsaMeydaniApp(isLoggedIn: token != null));
+  // Uygulama başlatılıyor
+  runApp(MyAppLauncher(token: token));
+}
+
+// Bu widget başlangıç kararını verir
+class MyAppLauncher extends StatelessWidget {
+  final String token;
+
+  const MyAppLauncher({super.key, required this.token});
+
+  @override
+  Widget build(BuildContext context) {
+    return BorsaMeydaniApp(isLoggedIn: token.isNotEmpty);
+  }
 }
 
 class BorsaMeydaniApp extends StatelessWidget {
@@ -27,10 +39,11 @@ class BorsaMeydaniApp extends StatelessWidget {
     return MaterialApp(
       title: 'Borsa Meydanı',
       debugShowCheckedModeBanner: false,
-      initialRoute: isLoggedIn ? '/home' : '/login',
+      // initialRoute yerine home kullanmak daha güvenlidir
+      home: isLoggedIn ? MainNavigation() : LoginScreen(),
       routes: {
         '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(), // ✅ Register route tanımı
+        '/register': (context) => RegisterScreen(),
         '/home': (context) => MainNavigation(),
       },
     );
