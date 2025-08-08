@@ -17,7 +17,7 @@ class AboutScreen extends StatelessWidget {
             Text("https://apiservice.istib.org.tr/api/BorsaMeydani"),
             SizedBox(height: 20),
             Text("İletişim", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text('''E-posta: info@istib.org.tr
+            Text('''E-posta: basin@istib.org.tr
 Telefon: 0 (212) 511 84 40'''),
           ],
         ),

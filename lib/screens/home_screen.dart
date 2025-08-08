@@ -92,15 +92,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Expanded(
                                       child: Text(
                                         haber.baslik,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     IconButton(
                                       icon: Icon(
-                                        isFav ? Icons.favorite : Icons.favorite_border,
+                                        isFav
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
                                         color: isFav ? Colors.red : null,
                                       ),
-                                      onPressed: () => _toggleFavorite(haber.id.toString()),
+                                      onPressed: () =>
+                                          _toggleFavorite(haber.id.toString()),
                                     ),
                                   ],
                                 ),
@@ -111,18 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     if (haber.videoURL != null)
                                       IconButton(
-                                        icon: Image.asset('assets/icons/tv_icon.png', width: 24),
-                                        onPressed: () => launchUrl(Uri.parse(haber.videoURL!)),
+                                        icon: Image.asset(
+                                            'assets/icons/tv_icon.png',
+                                            width: 24),
+                                        onPressed: () => launchUrl(
+                                            Uri.parse(haber.videoURL!)),
                                       ),
                                     if (haber.egitimPdf != null)
                                       IconButton(
-                                        icon: Image.asset('assets/icons/pdf_icon.png', width: 24),
-                                        onPressed: () => launchUrl(Uri.parse(haber.egitimPdf!)),
-                                      ),
-                                    if (haber.basin != null)
-                                      IconButton(
-                                        icon: Image.asset('assets/icons/earsiv1.png', width: 24),
-                                        onPressed: () => launchUrl(Uri.parse(haber.basin!)),
+                                        icon: Image.asset(
+                                            'assets/icons/pdf_icon.png',
+                                            width: 24),
+                                        onPressed: () => launchUrl(
+                                            Uri.parse(haber.egitimPdf!)),
                                       ),
                                   ],
                                 ),
